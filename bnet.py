@@ -46,25 +46,21 @@ def get_info(name, realm=BNET_REALM, fields=[]):
 
 	infos = []
 
-	if len(fields) == 0:
-		name = data["name"]
-		cl = CLASSES[int(data["class"])]
-		race = RACES[int(data["race"])]
+	name = data["name"]
+	cl = CLASSES[int(data["class"])]
+	race = RACES[int(data["race"])]
 
-		info = "**Name**: %s *Class*: `%s` *Race*: `%s`" % (name, cl, race)
+	info = "**Character** *Name*: `%s` *Class*: `%s` *Race*: `%s`" % (name, cl, race)
+	infos.append(info)
+
+	def humanize_string(s):
+		return re.sub("([a-z])([A-Z])","\g<1> \g<2>", s).title()
+
+	for field in fields:
+		info = "**%s**" % field.title()
+		for k, v in data[field].items():
+			if not (isinstance(v, list) or isinstance(v, dict)):
+				info += " *%s*: `%s`" % (humanize_string(str(k)), humanize_string(str(v)))
 		infos.append(info)
-	else:
-		def humanize_string(s):
-			return re.sub("([a-z])([A-Z])","\g<1> \g<2>", s).title()
-
-		info = "**Name**: %s" % data["name"]
-		infos.append(info)
-
-		for field in fields:
-			info = "**%s** " % field.title()
-			for k, v in data[field].items():
-				if not (isinstance(v, list) or isinstance(v, dict)):
-					info += " *%s*: `%s`" % (humanize_string(str(k)), humanize_string(str(v)))
-			infos.append(info)
 
 	return infos
