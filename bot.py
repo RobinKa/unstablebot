@@ -39,7 +39,7 @@ class UnstableClient(dc.Client):
         if "@" in s:
             split = s.split("@", maxsplit=1)
             char_name = split[0]
-            realm = split[1].replace("-", " ")
+            realm = split[1]
             return char_name, realm
         else:
             char_name = s

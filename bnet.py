@@ -46,11 +46,12 @@ def get_info(name, realm=BNET_REALM, fields=[]):
 
 	infos = []
 
+	realm = data["realm"]
 	name = data["name"]
 	cl = CLASSES[int(data["class"])]
 	race = RACES[int(data["race"])]
 
-	info = "**Character** *Name*: `%s` *Class*: `%s` *Race*: `%s`" % (name, cl, race)
+	info = "**Character** *Realm*: `%s` *Name*: `%s` *Class*: `%s` *Race*: `%s`" % (realm, name, cl, race)
 	infos.append(info)
 
 	def humanize_string(s):
