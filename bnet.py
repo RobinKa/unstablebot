@@ -39,7 +39,7 @@ CLASSES = {
 def get_info(name, realm=BNET_REALM, fields=[]):
 	print("Fields:", fields)
 
-	char = Character(apikey=BNET_KEY, realm=BNET_REALM, name=name, fields=fields)
+	char = Character(apikey=BNET_KEY, realm=realm, name=name, fields=fields)
 	status_code, data = char.get()
 
 	print("Data:", data)
