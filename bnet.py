@@ -75,6 +75,9 @@ def get_guild_news(since_time, name, realm=BNET_REALM):
 
     print("GetGuildNews", since_time, "status:", status_code)
 
+    if status_code != 200:
+        return False, None, None
+
     news = []
     newest_time = since_time if since_time is not None else 0
 
@@ -90,7 +93,7 @@ def get_guild_news(since_time, name, realm=BNET_REALM):
         if news_time > newest_time:
             newest_time = news_time
 
-    return news, newest_time
+    return True, news, newest_time
 
 def get_realm_status(realm=BNET_REALM):
     realms = Realm(apikey=BNET_KEY, realms=[realm])

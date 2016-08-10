@@ -61,10 +61,14 @@ class UnstableClient(dc.Client):
 
         while not self.is_closed:
             print("Checking news", last_check_time)
-            guild_news, last_check_time = bnet.get_guild_news(since_time=last_check_time, name=BOT_NEWS_CHECK_GUILD, realm=BOT_NEWS_CHECK_REALM)
-            print("Got news", last_check_time, guild_news)
-            for news in guild_news:
-                await self.send_message(channel, news)
+            success, new_guild_news, new_last_check_time = bnet.get_guild_news(since_time=last_check_time, name=BOT_NEWS_CHECK_GUILD, realm=BOT_NEWS_CHECK_REALM)
+            print("Got news", success, new_last_check_time, new_guild_news)
+
+            if success:
+                guild_news, last_check_time = new_guild_news, new_last_check_time
+
+                for news in guild_news:
+                    await self.send_message(channel, news)
 
             await asyncio.sleep(30)
 
