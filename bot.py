@@ -95,8 +95,8 @@ class UnstableClient(dc.Client):
                     if realm_queue != new_realm_queue:
                         await self.send_message(channel, "%s is %s" % (BOT_REALM_STATUS_REALM, "now in queue mode" if new_realm_queue else "not in queue mode anymore"))
 
-                    if realm_population != new_realm_population:
-                        await self.send_message(channel, "%s population changed from %s to %s" % (BOT_REALM_STATUS_REALM, realm_population.title(), new_realm_population.title()))
+                    #if realm_population != new_realm_population:
+                    #    await self.send_message(channel, "%s population changed from %s to %s" % (BOT_REALM_STATUS_REALM, realm_population.title(), new_realm_population.title()))
 
                 realm_status, realm_queue, realm_population = new_realm_status, new_realm_queue, new_realm_population
 
